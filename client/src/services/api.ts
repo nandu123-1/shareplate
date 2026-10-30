@@ -1,3 +1,5 @@
+import { handleMockRequest } from './mockFallback';
+
 const API_BASE = '/api';
 
 export function getAuthToken(): string | null {
@@ -23,18 +25,31 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     (headers as any)['Authorization'] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${API_BASE}${endpoint}`, {
-    ...options,
-    headers
-  });
+  try {
+    const res = await fetch(`${API_BASE}${endpoint}`, {
+      ...options,
+      headers
+    });
 
-  const data = await res.json().catch(() => ({}));
+    const contentType = res.headers.get('content-type') || '';
+    if (res.ok && contentType.includes('application/json')) {
+      const data = await res.json();
+      return data as T;
+    }
 
-  if (!res.ok) {
+    // If 404 or non-JSON returned (e.g. static host Vercel without express server), fall back to mock engine
+    if (res.status === 404 || !contentType.includes('application/json')) {
+      console.warn(`[SharePlate] Backend API not responding at ${endpoint}. Using persistent client store.`);
+      return handleMockRequest(endpoint, options) as T;
+    }
+
+    const data = await res.json().catch(() => ({}));
     throw new Error(data.error || data.message || `Request failed with status ${res.status}`);
+  } catch (err: any) {
+    // If NetworkError or backend server offline, use client-side mock store seamlessly
+    console.warn(`[SharePlate] Network offline (${err.message}). Using persistent client store for ${endpoint}.`);
+    return handleMockRequest(endpoint, options) as T;
   }
-
-  return data as T;
 }
 
 export const api = {
