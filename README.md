@@ -1,6 +1,8 @@
 # SharePlate — Good Food. Shared Future.
 ### Premium 3D Food Donation & Redistribution Platform
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/nandu123-1/shareplate&root-directory=client)
+
 SharePlate is a fullstack food rescue platform designed to connect commercial food businesses (restaurants, bakeries, hotels, caterers, and supermarkets) with verified charitable community organizations (food banks, youth shelters, and community kitchens).
 
 ---
