@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0B1110;
+    color: #F8FAFC;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Custom delicate scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #141A18;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A3330;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #38423F;
+}
+
+/* Glassmorphism surfaces */
+.glass-nav {
+  background: rgba(11, 17, 16, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(30, 41, 38, 0.8);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+.glass-card {
+  background: rgba(18, 26, 23, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(38, 48, 45, 0.7);
+  box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.4);
+}
+
+/* Subtle dot grid pattern */
+.bg-subtle-dots {
+  background-image: radial-gradient(rgba(143, 188, 167, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dark .bg-subtle-dots {
+  background-image: radial-gradient(rgba(143, 188, 167, 0.08) 1px, transparent 1px);
+}
