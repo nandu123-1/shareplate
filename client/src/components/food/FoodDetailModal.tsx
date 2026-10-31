@@ -90,13 +90,13 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
     <Modal isOpen={isOpen} onClose={onClose} maxWidth="xl">
       <div className="space-y-6">
         {/* Hero image and quick stats */}
-        <div className="relative h-64 rounded-xl overflow-hidden bg-cream-200 dark:bg-charcoal-800">
+        <div className="relative h-64 rounded-xl overflow-hidden bg-charcoal-800">
           <img
             src={listing.image_url || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80'}
             alt={listing.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-charcoal-950/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/90 via-charcoal-950/40 to-transparent" />
 
           <div className="absolute top-4 left-4 flex gap-2">
             <Badge variant="citrus" size="sm">
@@ -108,33 +108,33 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
           </div>
 
           <div className="absolute bottom-4 left-4 right-4 text-white">
-            <h3 className="text-2xl font-bold tracking-tight font-editorial">
+            <h3 className="text-2xl font-bold tracking-tight font-editorial text-cream-50">
               {listing.title}
             </h3>
-            <p className="text-sm opacity-90 mt-0.5">
-              Offered by <span className="font-semibold">{listing.donor_business_name || 'Verified Food Partner'}</span>
+            <p className="text-sm opacity-90 mt-0.5 text-cream-200">
+              Offered by <span className="font-semibold text-white">{listing.donor_business_name || 'Verified Food Partner'}</span>
               {listing.donor_city ? ` • ${listing.donor_city}` : ''}
             </p>
           </div>
         </div>
 
         {/* Quantities & Status Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 rounded-xl bg-cream-100 dark:bg-charcoal-800/80 border border-cream-200 dark:border-charcoal-700">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 rounded-xl bg-charcoal-850/90 border border-charcoal-700">
           <div>
-            <span className="text-[11px] text-charcoal-400 dark:text-charcoal-400 uppercase tracking-wider font-semibold">Surplus Available</span>
-            <p className="text-xl font-bold text-forest-900 dark:text-emerald-400 mt-0.5">
-              {listing.remaining_quantity ?? listing.quantity ?? 0} <span className="text-xs font-normal text-charcoal-500 dark:text-charcoal-400">{listing.unit || 'units'}</span>
+            <span className="text-[11px] text-charcoal-400 uppercase tracking-wider font-semibold">Surplus Available</span>
+            <p className="text-xl font-bold text-emerald-400 mt-0.5">
+              {listing.remaining_quantity ?? listing.quantity ?? 0} <span className="text-xs font-normal text-charcoal-400">{listing.unit || 'units'}</span>
             </p>
           </div>
           <div>
-            <span className="text-[11px] text-charcoal-400 dark:text-charcoal-400 uppercase tracking-wider font-semibold">Total Prepared</span>
-            <p className="text-xl font-bold text-charcoal-800 dark:text-cream-100 mt-0.5">
-              {listing.quantity ?? 0} <span className="text-xs font-normal text-charcoal-500 dark:text-charcoal-400">{listing.unit || 'units'}</span>
+            <span className="text-[11px] text-charcoal-400 uppercase tracking-wider font-semibold">Total Prepared</span>
+            <p className="text-xl font-bold text-cream-100 mt-0.5">
+              {listing.quantity ?? 0} <span className="text-xs font-normal text-charcoal-400">{listing.unit || 'units'}</span>
             </p>
           </div>
           <div className="col-span-2 sm:col-span-1">
-            <span className="text-[11px] text-charcoal-400 dark:text-charcoal-400 uppercase tracking-wider font-semibold">Cost</span>
-            <p className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mt-0.5">
+            <span className="text-[11px] text-charcoal-400 uppercase tracking-wider font-semibold">Cost</span>
+            <p className="text-xl font-bold text-emerald-400 mt-0.5">
               100% Free
             </p>
           </div>
@@ -142,30 +142,30 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
 
         {/* Description */}
         <div>
-          <h4 className="text-xs font-bold text-forest-950 dark:text-cream-100 uppercase tracking-wider mb-2">Description</h4>
-          <p className="text-sm text-charcoal-700 dark:text-charcoal-300 leading-relaxed bg-white dark:bg-charcoal-800/80 p-3.5 rounded-xl border border-cream-200/80 dark:border-charcoal-700">
+          <h4 className="text-xs font-bold text-cream-100 uppercase tracking-wider mb-2">Description</h4>
+          <p className="text-sm text-charcoal-300 leading-relaxed bg-charcoal-850/90 p-3.5 rounded-xl border border-charcoal-700">
             {listing.description || 'Nutritious surplus food provided by community donor in excellent condition.'}
           </p>
         </div>
 
         {/* Storage, Expiry, Safety Protocols */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-3.5 rounded-xl bg-forest-50/60 dark:bg-forest-950/40 border border-forest-100 dark:border-forest-900/60 text-xs">
-            <div className="flex items-center gap-1.5 font-bold text-forest-900 dark:text-emerald-300 mb-1">
-              <ShieldCheck className="w-4 h-4 text-forest-700 dark:text-emerald-400" />
+          <div className="p-3.5 rounded-xl bg-forest-950/60 border border-forest-900/60 text-xs">
+            <div className="flex items-center gap-1.5 font-bold text-emerald-300 mb-1">
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <span>Storage Instructions</span>
             </div>
-            <p className="text-forest-800 dark:text-emerald-200/90 leading-relaxed">
+            <p className="text-emerald-200/90 leading-relaxed">
               {listing.storage_instructions || 'Store according to standard safe temperature controls.'}
             </p>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-citrus-50/60 dark:bg-citrus-950/40 border border-citrus-100 dark:border-citrus-900/60 text-xs">
-            <div className="flex items-center gap-1.5 font-bold text-citrus-900 dark:text-citrus-300 mb-1">
-              <Clock className="w-4 h-4 text-citrus-700 dark:text-citrus-400" />
+          <div className="p-3.5 rounded-xl bg-citrus-950/60 border border-citrus-900/60 text-xs">
+            <div className="flex items-center gap-1.5 font-bold text-citrus-300 mb-1">
+              <Clock className="w-4 h-4 text-citrus-400" />
               <span>Use-By / Expiry Guidance</span>
             </div>
-            <p className="text-citrus-800 dark:text-citrus-200/90 leading-relaxed">
+            <p className="text-citrus-200/90 leading-relaxed">
               {listing.expiry_guidance || 'Consume promptly or refrigerate immediately upon pickup.'}
             </p>
           </div>
@@ -176,11 +176,11 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
           <div className="flex flex-wrap gap-4 items-center">
             {dietaryTags.length > 0 && (
               <div className="flex flex-wrap gap-1.5 items-center">
-                <span className="text-xs text-charcoal-400 dark:text-charcoal-400 font-medium">Dietary:</span>
+                <span className="text-xs text-charcoal-400 font-medium">Dietary:</span>
                 {dietaryTags.map(tag => (
                   <span
                     key={tag}
-                    className="text-xs px-2.5 py-0.5 rounded-full bg-cream-200 dark:bg-charcoal-700 text-charcoal-700 dark:text-cream-200 border border-cream-300 dark:border-charcoal-600 font-medium"
+                    className="text-xs px-2.5 py-0.5 rounded-full bg-charcoal-800 text-cream-200 border border-charcoal-700 font-medium"
                   >
                     {tag}
                   </span>
@@ -190,7 +190,7 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
 
             {rawAllergens.length > 0 && (
               <div className="flex flex-wrap gap-1.5 items-center">
-                <span className="text-xs text-charcoal-400 dark:text-charcoal-400 font-medium">Allergens:</span>
+                <span className="text-xs text-charcoal-400 font-medium">Allergens:</span>
                 {rawAllergens.map(alg => {
                   const isClean = alg.toLowerCase().includes('none') || alg.toLowerCase().includes('clean');
                   return (
@@ -212,29 +212,29 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
         )}
 
         {/* Pickup Logistics */}
-        <div className="p-4 rounded-xl bg-white dark:bg-charcoal-800/80 border border-cream-200 dark:border-charcoal-700 text-xs space-y-2">
-          <h4 className="font-bold text-forest-950 dark:text-cream-100 uppercase tracking-wider mb-1">Pickup Coordination</h4>
-          <div className="flex items-start gap-2 text-charcoal-700 dark:text-charcoal-300">
-            <MapPin className="w-4 h-4 text-forest-600 dark:text-emerald-400 mt-0.5 shrink-0" />
+        <div className="p-4 rounded-xl bg-charcoal-850/90 border border-charcoal-700 text-xs space-y-2">
+          <h4 className="font-bold text-cream-100 uppercase tracking-wider mb-1">Pickup Coordination</h4>
+          <div className="flex items-start gap-2 text-charcoal-300">
+            <MapPin className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
             <div>
-              <p className="font-semibold text-charcoal-900 dark:text-cream-100">
+              <p className="font-semibold text-cream-100">
                 {listing.pickup_location || 'Address confirmed on collection pass'}
               </p>
               {(listing.donor_pickup_address || listing.donor_city) && (
-                <p className="text-charcoal-500 dark:text-charcoal-400 mt-0.5">
+                <p className="text-charcoal-400 mt-0.5">
                   {[listing.donor_pickup_address, listing.donor_city].filter(Boolean).join(', ')}
                 </p>
               )}
             </div>
           </div>
           {listing.donor_phone && (
-            <div className="flex items-center gap-2 text-charcoal-700 dark:text-charcoal-300">
-              <Phone className="w-4 h-4 text-forest-600 dark:text-emerald-400 shrink-0" />
-              <span>Donor Contact: <strong className="text-charcoal-900 dark:text-cream-100">{listing.donor_phone}</strong></span>
+            <div className="flex items-center gap-2 text-charcoal-300">
+              <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>Donor Contact: <strong className="text-cream-100">{listing.donor_phone}</strong></span>
             </div>
           )}
           {listing.donor_notes && (
-            <div className="p-2.5 rounded-lg bg-cream-100 dark:bg-charcoal-900 text-charcoal-600 dark:text-charcoal-300 italic border border-cream-200 dark:border-charcoal-700">
+            <div className="p-2.5 rounded-lg bg-charcoal-900 text-charcoal-300 italic border border-charcoal-700">
               Donor Note: "{listing.donor_notes}"
             </div>
           )}

@@ -44,3 +44,4 @@ tmp/
 .cache/
 videos/
 .~lock.*
+*.webm

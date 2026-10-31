@@ -84,7 +84,7 @@ export const AvailableFoodPage: React.FC = () => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white dark:bg-charcoal-900 p-4 sm:p-5 rounded-2xl border border-cream-300 dark:border-charcoal-800 shadow-soft-sm space-y-4">
+      <div className="bg-charcoal-900 p-4 sm:p-5 rounded-2xl border border-charcoal-800 shadow-soft-sm space-y-4">
         {/* Search input + Sort dropdown */}
         <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
@@ -94,7 +94,7 @@ export const AvailableFoodPage: React.FC = () => {
               placeholder="Search by food name, description, donor, or city..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-cream-300 dark:border-charcoal-700 text-sm text-charcoal-900 dark:text-cream-100 bg-white dark:bg-charcoal-800 focus:outline-none focus:ring-2 focus:ring-forest-800"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-charcoal-700 text-sm text-cream-100 bg-charcoal-800 focus:outline-none focus:ring-2 focus:ring-forest-800"
             />
           </div>
 
@@ -105,7 +105,7 @@ export const AvailableFoodPage: React.FC = () => {
                 setSort(e.target.value);
                 setPage(1);
               }}
-              className="px-3.5 py-2.5 rounded-xl border border-cream-300 dark:border-charcoal-700 text-xs font-semibold bg-white dark:bg-charcoal-800 text-charcoal-700 dark:text-cream-200 focus:outline-none focus:ring-2 focus:ring-forest-800"
+              className="px-3.5 py-2.5 rounded-xl border border-charcoal-700 text-xs font-semibold bg-charcoal-800 text-cream-200 focus:outline-none focus:ring-2 focus:ring-forest-800"
             >
               <option value="newest">Recently Listed</option>
               <option value="expiry_soon">Pickup Ending Soonest</option>
@@ -119,8 +119,8 @@ export const AvailableFoodPage: React.FC = () => {
         </form>
 
         {/* Category Pills */}
-        <div className="space-y-2 pt-2 border-t border-cream-200 dark:border-charcoal-800">
-          <span className="text-[11px] font-semibold text-charcoal-400 dark:text-charcoal-400 uppercase tracking-wider block">
+        <div className="space-y-2 pt-2 border-t border-charcoal-800">
+          <span className="text-[11px] font-semibold text-charcoal-400 uppercase tracking-wider block">
             Category
           </span>
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
@@ -133,8 +133,8 @@ export const AvailableFoodPage: React.FC = () => {
                 }}
                 className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
                   category === cat
-                    ? 'bg-forest-900 dark:bg-emerald-600 text-white'
-                    : 'bg-cream-100 dark:bg-charcoal-800 text-charcoal-700 dark:text-charcoal-300 hover:bg-cream-200 dark:hover:bg-charcoal-700 border border-cream-300 dark:border-charcoal-700'
+                    ? 'bg-emerald-600 text-white'
+                    : 'bg-charcoal-800 text-charcoal-300 hover:bg-charcoal-700 border border-charcoal-700'
                 }`}
               >
                 {cat}
@@ -145,7 +145,7 @@ export const AvailableFoodPage: React.FC = () => {
 
         {/* Dietary Filters */}
         <div className="space-y-2">
-          <span className="text-[11px] font-semibold text-charcoal-400 dark:text-charcoal-400 uppercase tracking-wider block">
+          <span className="text-[11px] font-semibold text-charcoal-400 uppercase tracking-wider block">
             Dietary Requirements
           </span>
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
@@ -159,7 +159,7 @@ export const AvailableFoodPage: React.FC = () => {
                 className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
                   dietary === diet
                     ? 'bg-citrus-600 text-white'
-                    : 'bg-cream-100 dark:bg-charcoal-800 text-charcoal-700 dark:text-charcoal-300 hover:bg-cream-200 dark:hover:bg-charcoal-700 border border-cream-300 dark:border-charcoal-700'
+                    : 'bg-charcoal-800 text-charcoal-300 hover:bg-charcoal-700 border border-charcoal-700'
                 }`}
               >
                 {diet}
@@ -171,22 +171,22 @@ export const AvailableFoodPage: React.FC = () => {
 
       {/* Results Count & Listings Grid */}
       <div className="space-y-4">
-        <div className="flex items-center justify-between text-xs text-charcoal-500 dark:text-charcoal-400">
+        <div className="flex items-center justify-between text-xs text-charcoal-400">
           <span>
-            Showing <strong className="text-forest-900 dark:text-emerald-400">{listings.length}</strong> of <strong className="text-forest-900 dark:text-emerald-400">{total}</strong> available donations
+            Showing <strong className="text-emerald-400">{listings.length}</strong> of <strong className="text-emerald-400">{total}</strong> available donations
           </span>
         </div>
 
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map(n => (
-              <div key={n} className="h-80 rounded-2xl bg-cream-200/60 dark:bg-charcoal-800/60 animate-pulse border border-cream-300 dark:border-charcoal-800" />
+              <div key={n} className="h-80 rounded-2xl bg-charcoal-800/60 animate-pulse border border-charcoal-800" />
             ))}
           </div>
         ) : listings.length === 0 ? (
-          <div className="p-16 text-center bg-white dark:bg-charcoal-900 rounded-3xl border border-cream-300 dark:border-charcoal-800 space-y-3">
-            <p className="text-lg font-bold text-forest-950 dark:text-cream-50 font-editorial">No surplus listings match your filters</p>
-            <p className="text-xs text-charcoal-500 dark:text-charcoal-400 max-w-sm mx-auto">
+          <div className="p-16 text-center bg-charcoal-900 rounded-3xl border border-charcoal-800 space-y-3">
+            <p className="text-lg font-bold text-cream-50 font-editorial">No surplus listings match your filters</p>
+            <p className="text-xs text-charcoal-400 max-w-sm mx-auto">
               Try clearing your search term or switching to another category to discover available food.
             </p>
             <Button

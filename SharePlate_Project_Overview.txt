@@ -1,0 +1,46 @@
+================================================================================
+SHAREPLATE — PROJECT OVERVIEW & ARCHITECTURAL SPECIFICATION
+"Good Food. Shared Future."
+Production Deployment: https://client-nine-ebon.vercel.app
+GitHub Repository:     https://github.com/nandu123-1/shareplate
+================================================================================
+
+1. DESCRIPTION
+--------------------------------------------------------------------------------
+SharePlate is an intelligent, hyper-local food rescue and surplus redistribution platform engineered to bridge the critical divide between commercial food waste and community hunger. Every day, tons of fresh, high-quality, chef-prepared meals, artisanal bakery batches, and organic farm produce are discarded by commercial restaurants, grocers, and catering services due to coordination bottlenecks and rigid logistics schedules. Simultaneously, millions of vulnerable families experience acute food insecurity without access to reliable nutrition. SharePlate transforms this systemic inefficiency into an organized, dignified, and friction-free social lifeline. By empowering commercial donors to instantly list edible surplus and granting verified non-profit organizations real-time discovery and claim capabilities, the platform prevents wholesome food from ending up in polluting municipal landfills. Built with an accessible dark obsidian design and immersive 3D digital-twin visualization, SharePlate delivers transparent, secure, and environmentally quantifiable community sustenance.
+
+
+2. SOLUTION
+--------------------------------------------------------------------------------
+The SharePlate solution eliminates coordination friction through an autonomous, end-to-end digital exchange network that connects food surplus donors directly with local community pantries in real time. Rather than relying on outdated phone trees or chaotic messaging channels, donors publish available items with automated safe-storage guidelines, temperature mandates, and precise pickup windows in under sixty seconds. Community charities discover nearby offerings through intelligent proximity and dietary matching, instantly submitting reservations backed by atomic inventory locks that eliminate overbooking risks. The custody transfer is protected by a six-digit cryptographic verification pass displayed on the recipient's mobile screen and validated by the donor during physical handover. Furthermore, the platform automatically converts rescued kilograms into auditable greenhouse gas avoidance metrics, providing commercial partners with certified environmental reports while ensuring safe, dignified, and rapid delivery of nutritious meals to those in urgent need.
+
+
+3. KEY FEATURES
+--------------------------------------------------------------------------------
+SharePlate incorporates a robust suite of purpose-built features designed for high-concurrency food rescue operations. Key capabilities include:
+- Rapid Surplus Listing Engine: Intuitive sixty-second wizard with category classification, portion quantification, allergen declarations, and dynamic pickup scheduling.
+- Real-Time Surplus Marketplace: Geo-filtered discovery with category tabs, dietary tagging, keyword indexing, and automated capacity-matching algorithms.
+- Cryptographic Handover Protocol: Tamper-proof six-digit verification codes guaranteeing authentic non-profit custody and dispute-free physical collection.
+- Interactive 3D SimReady Viewer: WebGL-powered 360-degree digital twin food inspector enabling recipients to evaluate portion quality before initiating requests.
+- Automated ESG Impact Accounting: Live mathematical formulas tracking total meals distributed, kilograms rescued, and carbon dioxide equivalent emissions prevented.
+- Dedicated Dual Dashboards: Tailored management centers for donors to coordinate kitchen collections and for community pantries to manage multiple volunteer pickups seamlessly.
+
+
+4. TECHNOLOGIES USED
+--------------------------------------------------------------------------------
+SharePlate utilizes a cutting-edge full-stack architecture built on modern web standards to ensure lightning-fast performance, extreme reliability, and high fault tolerance. The core system combines React 18, TypeScript, and Vite for an optimized client bundle with Node.js and Express powering a scalable RESTful application programming interface. Graphics and immersive rendering are driven by Three.js and React Three Fiber, delivering hardware-accelerated 3D food physics directly in the browser without third-party plugins. Visual design is implemented using Tailwind CSS with custom WCAG 2.2 AA compliant tokens, while Lucide React supplies accessible iconography. The data tier leverages an ACID-compliant SQLite relational engine with Zod schema validation ensuring strict type boundary safety. Additionally, an intelligent client-side fallback synchronization layer guarantees zero network failures during cloud edge deployments, ensuring uninterrupted platform availability across static hosting networks.
+
+
+5. FRONTEND TECHNOLOGY
+--------------------------------------------------------------------------------
+The frontend client is engineered as a high-performance single-page application utilizing React 18 paired with TypeScript for strict compile-time safety and component predictability. Built using Vite, the application benefits from instantaneous module hot-reloading and optimized production tree-shaking. Styling is structured with Tailwind CSS, customized into an ergonomic dark obsidian aesthetic that minimizes eye strain during evening kitchen operations while adhering to strict WCAG 2.2 AA accessibility ratios. Hardware-accelerated 3D rendering is executed through Three.js and React Three Fiber, featuring custom GLTF digital-twin food models with dynamic lighting, smooth orbital controls, and organic floating physics. Client-side navigation is orchestrated by React Router v6 with route guard protection, while React Context manages real-time role state and notification dispatches. Canvas-Confetti provides delightful micro-interactions celebrating completed handovers, creating an engaging and modern user experience.
+
+
+6. BACKEND TECHNOLOGY
+--------------------------------------------------------------------------------
+The backend service is powered by Node.js and the Express framework, delivering a modular, stateless RESTful architecture designed for predictable horizontal scalability. End-to-end data integrity is enforced using Zod validation schemas, rigorously inspecting all incoming HTTP payloads, query filters, and route parameters at the system boundary. Security is hardened using Helmet HTTP headers, strict Cross-Origin Resource Sharing controls, and express-rate-limit to protect donation endpoints against malicious automated requests. Business logic is organized into clean controller and service layers, decoupling authentication, surplus listing moderation, pickup pass validation, and impact accounting. A robust asynchronous audit pipeline logs every inventory transition, verification attempt, and administrative flag with microsecond timestamps. Designed for edge resilience, the API coordinates smoothly with client fallback caching, ensuring that platform services remain dependable even during transient network or connectivity interruptions.
+
+
+7. DATABASE USED
+--------------------------------------------------------------------------------
+SharePlate utilizes an ACID-compliant SQLite relational database managed through better-sqlite3 for ultra-low latency, zero-configuration persistence, and synchronous execution speed. The relational schema is rigorously normalized, enforcing foreign key constraints, uniqueness checks, and cascade triggers across user accounts, food listings, reservation requests, notifications, and immutable audit logs. Critical surplus allocation workflows utilize atomic SQL transactions, deducting available portion quantities and locking reservation states in a single discrete step to prevent race conditions or simultaneous double-allocations. Multi-column indexing on status flags, category filters, and timestamp ranges guarantees sub-millisecond query retrieval across large catalogues. Complex fields including dietary tags and allergen arrays are serialized as structured JSON strings with type-safe schema decoders. This embedded architecture offers deterministic database portability, lightning-fast backup capabilities, and zero external database management overhead, making it perfectly suited for robust municipal deployments.

@@ -239,8 +239,8 @@ export const LandingPage: React.FC = () => {
               onClick={() => setSelectedCategory(cat)}
               className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
                 selectedCategory === cat
-                  ? 'bg-forest-900 dark:bg-emerald-600 text-white shadow-soft-sm'
-                  : 'bg-white dark:bg-charcoal-850 text-charcoal-700 dark:text-charcoal-300 hover:bg-cream-200 dark:hover:bg-charcoal-800 border border-cream-300 dark:border-charcoal-700'
+                  ? 'bg-emerald-600 text-white shadow-soft-sm'
+                  : 'bg-charcoal-900 text-charcoal-300 hover:bg-charcoal-800 border border-charcoal-700'
               }`}
             >
               {cat}
@@ -252,12 +252,12 @@ export const LandingPage: React.FC = () => {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3].map((n) => (
-              <div key={n} className="h-80 rounded-2xl bg-cream-200/60 dark:bg-charcoal-800/60 animate-pulse border border-cream-300 dark:border-charcoal-800" />
+              <div key={n} className="h-80 rounded-2xl bg-charcoal-800/60 animate-pulse border border-charcoal-800" />
             ))}
           </div>
         ) : filteredListings.length === 0 ? (
-          <div className="p-12 text-center bg-white dark:bg-charcoal-900 rounded-2xl border border-cream-300 dark:border-charcoal-800">
-            <p className="text-charcoal-500 dark:text-charcoal-400 text-sm">No food listings found in this category.</p>
+          <div className="p-12 text-center bg-charcoal-900 rounded-2xl border border-charcoal-800">
+            <p className="text-charcoal-400 text-sm">No food listings found in this category.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -341,20 +341,20 @@ export const LandingPage: React.FC = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* For Donors */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-white dark:bg-charcoal-900 border border-cream-300 dark:border-charcoal-800 shadow-soft-sm hover:shadow-soft transition-all space-y-5">
-            <div className="w-12 h-12 rounded-2xl bg-citrus-100 dark:bg-citrus-950/80 text-citrus-700 dark:text-citrus-400 flex items-center justify-center">
+          <div className="p-8 sm:p-10 rounded-3xl bg-charcoal-900 border border-charcoal-800 shadow-soft-sm hover:shadow-soft transition-all space-y-5">
+            <div className="w-12 h-12 rounded-2xl bg-citrus-950/80 text-citrus-400 flex items-center justify-center">
               <Building className="w-6 h-6" />
             </div>
-            <h3 className="text-2xl font-bold text-forest-950 dark:text-cream-50 font-editorial">
+            <h3 className="text-2xl font-bold text-cream-50 font-editorial">
               For Food Businesses & Caterers
             </h3>
-            <p className="text-xs text-charcoal-600 dark:text-charcoal-300 leading-relaxed">
+            <p className="text-xs text-charcoal-300 leading-relaxed">
               Transform inevitable kitchen overproduction into audited social impact. Streamline CSR commitments, reduce disposal fees, and receive verified donation receipts.
             </p>
-            <ul className="space-y-2 text-xs text-charcoal-700 dark:text-charcoal-300 font-medium">
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> Rapid 2-minute listing wizard with food photos</li>
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> Coordinated pickup windows so staff aren't interrupted</li>
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> 6-digit secure handover code verification</li>
+            <ul className="space-y-2 text-xs text-charcoal-300 font-medium">
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Rapid 2-minute listing wizard with food photos</li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Coordinated pickup windows so staff aren't interrupted</li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> 6-digit secure handover code verification</li>
             </ul>
             <Link to="/register" className="inline-block pt-2">
               <Button variant="primary" size="md">
@@ -364,20 +364,20 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* For Recipient Organizations */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-white dark:bg-charcoal-900 border border-cream-300 dark:border-charcoal-800 shadow-soft-sm hover:shadow-soft transition-all space-y-5">
-            <div className="w-12 h-12 rounded-2xl bg-forest-100 dark:bg-forest-950/80 text-forest-900 dark:text-emerald-400 flex items-center justify-center">
+          <div className="p-8 sm:p-10 rounded-3xl bg-charcoal-900 border border-charcoal-800 shadow-soft-sm hover:shadow-soft transition-all space-y-5">
+            <div className="w-12 h-12 rounded-2xl bg-forest-950/80 text-emerald-400 flex items-center justify-center">
               <Users className="w-6 h-6" />
             </div>
-            <h3 className="text-2xl font-bold text-forest-950 dark:text-cream-50 font-editorial">
+            <h3 className="text-2xl font-bold text-cream-50 font-editorial">
               For Charitable Organizations & NGOs
             </h3>
-            <p className="text-xs text-charcoal-600 dark:text-charcoal-300 leading-relaxed">
+            <p className="text-xs text-charcoal-300 leading-relaxed">
               Access high-nutrition, chef-prepared hot meals and fresh grocery staples to stretch your food program budget further and feed more people daily.
             </p>
-            <ul className="space-y-2 text-xs text-charcoal-700 dark:text-charcoal-300 font-medium">
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> 100% free food donations with allergen transparency</li>
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> Smart capacity matching tailored to your daily headcounts</li>
-              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> Immediate reservation without overbooking risk</li>
+            <ul className="space-y-2 text-xs text-charcoal-300 font-medium">
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> 100% free food donations with allergen transparency</li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Smart capacity matching tailored to your daily headcounts</li>
+              <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Immediate reservation without overbooking risk</li>
             </ul>
             <Link to="/register" className="inline-block pt-2">
               <Button variant="secondary" size="md">

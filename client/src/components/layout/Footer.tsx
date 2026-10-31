@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
           {/* Brand Info */}
           <div className="md:col-span-1 space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-cream-50 flex items-center justify-center text-forest-950">
+              <div className="w-8 h-8 rounded-lg bg-charcoal-900 border border-charcoal-800 flex items-center justify-center text-forest-950">
                 <svg className="w-4 h-4 text-citrus-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <circle cx="12" cy="12" r="9" />
                   <path d="M12 7c-2 2-3 4-3 6a3 3 0 0 0 6 0c0-2-1-4-3-6z" fill="#E06D3B" stroke="none" />

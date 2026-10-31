@@ -34,9 +34,9 @@ export const Button: React.FC<ButtonProps> = ({
     accent:
       'bg-citrus-500 text-white hover:bg-citrus-600 shadow-soft-sm hover:shadow-soft focus:ring-citrus-500',
     outline:
-      'bg-white text-slate-800 hover:bg-slate-50 border border-slate-200/90 dark:bg-charcoal-900 dark:text-cream-100 dark:border-charcoal-700 dark:hover:bg-charcoal-800 focus:ring-forest-800 shadow-soft-sm',
+      'bg-charcoal-900 text-cream-100 hover:bg-charcoal-800 border border-charcoal-700 focus:ring-forest-800 shadow-soft-sm',
     ghost:
-      'bg-transparent text-slate-700 hover:bg-slate-100 dark:text-cream-200 dark:hover:bg-charcoal-800 focus:ring-slate-300',
+      'bg-transparent text-cream-200 hover:bg-charcoal-800 focus:ring-charcoal-700',
     danger:
       'bg-red-600 text-white hover:bg-red-700 focus:ring-red-600 shadow-soft-sm'
   };

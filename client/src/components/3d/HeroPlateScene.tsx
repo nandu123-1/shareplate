@@ -373,9 +373,9 @@ export function HeroPlateScene() {
       </Canvas>
 
       {/* Interactive Hint */}
-      <div className="absolute bottom-3 right-6 pointer-events-none hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-cream-50/80 backdrop-blur-sm border border-cream-300/60 text-[11px] font-medium text-charcoal-500 shadow-soft-sm">
-        <span className="w-1.5 h-1.5 rounded-full bg-forest-600 animate-ping" />
-        Photorealistic 3D • Move cursor to tilt
+      <div className="absolute bottom-3 right-6 pointer-events-none hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-charcoal-900/90 backdrop-blur-md border border-charcoal-700 text-[11px] font-medium text-emerald-300 shadow-soft-sm">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+        NVIDIA SimReady 3D • Interactive Food Physics
       </div>
     </div>
   );

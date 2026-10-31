@@ -43,7 +43,7 @@ function ScrollToTop() {
 
 export function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-cream-100 dark:bg-charcoal-950 text-charcoal-900 dark:text-cream-100 selection:bg-forest-100 dark:selection:bg-forest-900 selection:text-forest-900 dark:selection:text-forest-100 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-[#0B1110] text-[#F8FAFC] selection:bg-forest-900 selection:text-forest-100 transition-colors duration-200">
       <ScrollToTop />
       {/* Instant Hackathon Demo Role Switcher Bar */}
       <DemoAccountBar />

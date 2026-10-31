@@ -111,22 +111,22 @@ export function InteractiveFoodViewer() {
   const current = FEATURED_ITEMS[selectedIndex];
 
   return (
-    <div className="relative rounded-3xl overflow-hidden glass-card p-6 shadow-soft-xl border border-slate-200/90 dark:border-charcoal-800 transition-all duration-300">
+    <div className="relative rounded-3xl overflow-hidden glass-card p-6 shadow-soft-xl border border-charcoal-800 transition-all duration-300">
       {/* Top Header Card Info */}
-      <div className="flex items-center justify-between pb-3 border-b border-slate-200/80 dark:border-charcoal-800">
+      <div className="flex items-center justify-between pb-3 border-b border-charcoal-800">
         <div>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-            <span className="text-[11px] font-bold uppercase tracking-wider text-forest-700 dark:text-emerald-400">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400">
               Live Rescued Asset • 3D SimReady
             </span>
           </div>
-          <h3 className="font-extrabold text-lg text-forest-950 dark:text-cream-50 font-editorial mt-0.5">
+          <h3 className="font-extrabold text-lg text-cream-50 font-editorial mt-0.5">
             {current.name}
           </h3>
         </div>
 
-        <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-citrus-100 dark:bg-citrus-950/80 text-citrus-700 dark:text-citrus-300 border border-citrus-200 dark:border-citrus-800">
+        <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-citrus-950/80 text-citrus-300 border border-citrus-800">
           {current.badge}
         </span>
       </div>
@@ -138,14 +138,14 @@ export function InteractiveFoodViewer() {
           className="w-full h-full"
           camera={{ position: [0, 0.5, 3.2], fov: 42 }}
         >
-          <ambientLight intensity={isDark ? 0.8 : 1.35} color="#FFFFFF" />
-          <directionalLight position={[4, 6, 4]} intensity={isDark ? 1.5 : 2.2} color="#FFFFFF" castShadow />
-          <pointLight position={[-4, -2, -2]} intensity={isDark ? 2.0 : 0.9} color={isDark ? '#10B981' : '#059669'} />
+          <ambientLight intensity={0.9} color="#FFFFFF" />
+          <directionalLight position={[4, 6, 4]} intensity={1.6} color="#FFFFFF" castShadow />
+          <pointLight position={[-4, -2, -2]} intensity={2.0} color="#10B981" />
           <pointLight position={[4, 2, 2]} intensity={1.1} color="#F97316" />
 
           <Suspense fallback={null}>
             <Float speed={2} rotationIntensity={0.2} floatIntensity={0.4}>
-              <ModelObject key={current.id} url={current.modelUrl} isDark={isDark} />
+              <ModelObject key={current.id} url={current.modelUrl} isDark={true} />
             </Float>
           </Suspense>
 
@@ -153,26 +153,26 @@ export function InteractiveFoodViewer() {
         </Canvas>
 
         {/* 360 Drag Prompt */}
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/75 dark:bg-charcoal-950/80 text-white text-[10px] backdrop-blur-md shadow-sm">
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 pointer-events-none flex items-center gap-1.5 px-3 py-1 rounded-full bg-charcoal-950/80 text-white text-[10px] backdrop-blur-md shadow-sm border border-charcoal-800">
           <RefreshCw className="w-3 h-3 text-citrus-400 animate-spin" style={{ animationDuration: '6s' }} />
           <span>Interactive 360° Drag & Rotate</span>
         </div>
       </div>
 
       {/* Live Metrics Grid */}
-      <div className="grid grid-cols-3 gap-2.5 pt-3 border-t border-slate-200/80 dark:border-charcoal-800 text-center">
-        <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-charcoal-800/60 border border-slate-100 dark:border-charcoal-700/40">
-          <p className="text-[10px] text-slate-500 dark:text-charcoal-400 font-medium">CO₂ Prevented</p>
-          <p className="text-xs font-bold text-forest-700 dark:text-emerald-400 mt-0.5">{current.co2Savings}</p>
+      <div className="grid grid-cols-3 gap-2.5 pt-3 border-t border-charcoal-800 text-center">
+        <div className="p-2.5 rounded-xl bg-charcoal-850/80 border border-charcoal-700/60">
+          <p className="text-[10px] text-charcoal-400 font-medium">CO₂ Prevented</p>
+          <p className="text-xs font-bold text-emerald-400 mt-0.5">{current.co2Savings}</p>
         </div>
-        <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-charcoal-800/60 border border-slate-100 dark:border-charcoal-700/40">
-          <p className="text-[10px] text-slate-500 dark:text-charcoal-400 font-medium">Safe Window</p>
-          <p className="text-xs font-bold text-citrus-600 dark:text-citrus-400 mt-0.5">{current.shelfLife}</p>
+        <div className="p-2.5 rounded-xl bg-charcoal-850/80 border border-charcoal-700/60">
+          <p className="text-[10px] text-charcoal-400 font-medium">Safe Window</p>
+          <p className="text-xs font-bold text-citrus-400 mt-0.5">{current.shelfLife}</p>
         </div>
-        <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-charcoal-800/60 border border-slate-100 dark:border-charcoal-700/40">
-          <p className="text-[10px] text-slate-500 dark:text-charcoal-400 font-medium">Impact Safety</p>
-          <p className="text-xs font-bold text-slate-800 dark:text-cream-100 mt-0.5 flex items-center justify-center gap-0.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-forest-600 dark:text-emerald-400" />
+        <div className="p-2.5 rounded-xl bg-charcoal-850/80 border border-charcoal-700/60">
+          <p className="text-[10px] text-charcoal-400 font-medium">Impact Safety</p>
+          <p className="text-xs font-bold text-cream-100 mt-0.5 flex items-center justify-center gap-0.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
             100% OK
           </p>
         </div>
@@ -186,8 +186,8 @@ export function InteractiveFoodViewer() {
             onClick={() => setSelectedIndex(idx)}
             className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
               selectedIndex === idx
-                ? 'bg-forest-900 text-white dark:bg-emerald-500 dark:text-charcoal-950 font-bold shadow-soft-sm scale-105'
-                : 'bg-slate-100 text-slate-700 dark:bg-charcoal-800 dark:text-charcoal-300 hover:bg-slate-200 dark:hover:bg-charcoal-700 border border-slate-200/80 dark:border-charcoal-700/50'
+                ? 'bg-emerald-500 text-charcoal-950 font-bold shadow-soft-sm scale-105'
+                : 'bg-charcoal-800 text-charcoal-300 hover:bg-charcoal-700 border border-charcoal-700/50'
             }`}
           >
             {item.name.split(' ')[1] || item.name}
