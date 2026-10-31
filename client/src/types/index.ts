@@ -54,13 +54,13 @@ export interface FoodListing {
   remaining_quantity: number;
   unit: string;
   preparation_time: string;
-  listing_time: string;
+  listing_time?: string;
   pickup_start: string;
   pickup_end: string;
   expiry_guidance: string;
   storage_instructions: string;
-  dietary_tags: string[];
-  allergens: string[];
+  dietary_tags?: string[] | string;
+  allergens?: string[] | string;
   pickup_location: string;
   image_url?: string;
   donor_notes?: string;

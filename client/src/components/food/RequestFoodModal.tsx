@@ -138,7 +138,15 @@ export const RequestFoodModal: React.FC<RequestFoodModalProps> = ({
             className="w-full px-3.5 py-2 rounded-xl border border-cream-300 dark:border-charcoal-700 bg-white dark:bg-charcoal-800 text-charcoal-900 dark:text-cream-100 text-sm focus:outline-none focus:ring-2 focus:ring-forest-800"
           />
           <p className="text-[11px] text-charcoal-400 dark:text-charcoal-400 mt-1">
-            Donor window: {new Date(listing.pickup_start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(listing.pickup_end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            Donor window: {(() => {
+              try {
+                const s = listing.pickup_start ? new Date(listing.pickup_start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Flexible';
+                const e = listing.pickup_end ? new Date(listing.pickup_end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Flexible';
+                return `${s} - ${e}`;
+              } catch {
+                return 'Flexible pickup schedule';
+              }
+            })()}
           </p>
         </div>
 

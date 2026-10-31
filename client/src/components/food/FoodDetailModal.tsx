@@ -15,6 +15,35 @@ interface FoodDetailModalProps {
   onRequestClick: (listing: FoodListing) => void;
 }
 
+const parseStringList = (val: unknown): string[] => {
+  if (!val) return [];
+  if (Array.isArray(val)) {
+    return val
+      .flatMap(item => (typeof item === 'string' ? item.split(',') : [String(item)]))
+      .map(s => s.trim())
+      .filter(Boolean);
+  }
+  if (typeof val === 'string') {
+    const trimmed = val.trim();
+    if (!trimmed) return [];
+    if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+      try {
+        const parsed = JSON.parse(trimmed);
+        if (Array.isArray(parsed)) {
+          return parsed
+            .flatMap(item => (typeof item === 'string' ? item.split(',') : [String(item)]))
+            .map(s => s.trim())
+            .filter(Boolean);
+        }
+      } catch {
+        // fallback
+      }
+    }
+    return trimmed.split(',').map(s => s.trim()).filter(Boolean);
+  }
+  return [];
+};
+
 export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
   listing,
   isOpen,
@@ -30,6 +59,8 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
 
   if (!listing) return null;
 
+  const dietaryTags = parseStringList(listing.dietary_tags);
+  const rawAllergens = parseStringList(listing.allergens);
   const isAvailable = listing.status === 'AVAILABLE' || listing.status === 'PARTIALLY_RESERVED';
 
   const handleReportSubmit = async (e: React.FormEvent) => {
@@ -59,20 +90,20 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
     <Modal isOpen={isOpen} onClose={onClose} maxWidth="xl">
       <div className="space-y-6">
         {/* Hero image and quick stats */}
-        <div className="relative h-64 rounded-xl overflow-hidden bg-cream-200">
+        <div className="relative h-64 rounded-xl overflow-hidden bg-cream-200 dark:bg-charcoal-800">
           <img
             src={listing.image_url || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80'}
             alt={listing.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950/80 via-charcoal-950/30 to-transparent" />
 
           <div className="absolute top-4 left-4 flex gap-2">
             <Badge variant="citrus" size="sm">
-              {listing.category}
+              {listing.category || 'Food'}
             </Badge>
             <Badge variant="forest" size="sm">
-              {listing.status}
+              {listing.status || 'AVAILABLE'}
             </Badge>
           </div>
 
@@ -81,7 +112,8 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
               {listing.title}
             </h3>
             <p className="text-sm opacity-90 mt-0.5">
-              Offered by <span className="font-semibold">{listing.donor_business_name}</span> • {listing.donor_city}
+              Offered by <span className="font-semibold">{listing.donor_business_name || 'Verified Food Partner'}</span>
+              {listing.donor_city ? ` • ${listing.donor_city}` : ''}
             </p>
           </div>
         </div>
@@ -91,13 +123,13 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
           <div>
             <span className="text-[11px] text-charcoal-400 dark:text-charcoal-400 uppercase tracking-wider font-semibold">Surplus Available</span>
             <p className="text-xl font-bold text-forest-900 dark:text-emerald-400 mt-0.5">
-              {listing.remaining_quantity} <span className="text-xs font-normal text-charcoal-500 dark:text-charcoal-400">{listing.unit}</span>
+              {listing.remaining_quantity ?? listing.quantity ?? 0} <span className="text-xs font-normal text-charcoal-500 dark:text-charcoal-400">{listing.unit || 'units'}</span>
             </p>
           </div>
           <div>
             <span className="text-[11px] text-charcoal-400 dark:text-charcoal-400 uppercase tracking-wider font-semibold">Total Prepared</span>
             <p className="text-xl font-bold text-charcoal-800 dark:text-cream-100 mt-0.5">
-              {listing.quantity} <span className="text-xs font-normal text-charcoal-500 dark:text-charcoal-400">{listing.unit}</span>
+              {listing.quantity ?? 0} <span className="text-xs font-normal text-charcoal-500 dark:text-charcoal-400">{listing.unit || 'units'}</span>
             </p>
           </div>
           <div className="col-span-2 sm:col-span-1">
@@ -112,7 +144,7 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
         <div>
           <h4 className="text-xs font-bold text-forest-950 dark:text-cream-100 uppercase tracking-wider mb-2">Description</h4>
           <p className="text-sm text-charcoal-700 dark:text-charcoal-300 leading-relaxed bg-white dark:bg-charcoal-800/80 p-3.5 rounded-xl border border-cream-200/80 dark:border-charcoal-700">
-            {listing.description}
+            {listing.description || 'Nutritious surplus food provided by community donor in excellent condition.'}
           </p>
         </div>
 
@@ -123,7 +155,9 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
               <ShieldCheck className="w-4 h-4 text-forest-700 dark:text-emerald-400" />
               <span>Storage Instructions</span>
             </div>
-            <p className="text-forest-800 dark:text-emerald-200/90 leading-relaxed">{listing.storage_instructions}</p>
+            <p className="text-forest-800 dark:text-emerald-200/90 leading-relaxed">
+              {listing.storage_instructions || 'Store according to standard safe temperature controls.'}
+            </p>
           </div>
 
           <div className="p-3.5 rounded-xl bg-citrus-50/60 dark:bg-citrus-950/40 border border-citrus-100 dark:border-citrus-900/60 text-xs">
@@ -131,34 +165,51 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
               <Clock className="w-4 h-4 text-citrus-700 dark:text-citrus-400" />
               <span>Use-By / Expiry Guidance</span>
             </div>
-            <p className="text-citrus-800 dark:text-citrus-200/90 leading-relaxed">{listing.expiry_guidance}</p>
+            <p className="text-citrus-800 dark:text-citrus-200/90 leading-relaxed">
+              {listing.expiry_guidance || 'Consume promptly or refrigerate immediately upon pickup.'}
+            </p>
           </div>
         </div>
 
         {/* Dietary & Allergens */}
-        <div className="flex flex-wrap gap-2 items-center">
-          {listing.dietary_tags && listing.dietary_tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 items-center mr-4">
-              <span className="text-xs text-charcoal-400 font-medium">Dietary:</span>
-              {listing.dietary_tags.map(tag => (
-                <span key={tag} className="text-xs px-2.5 py-0.5 rounded-full bg-cream-200 dark:bg-charcoal-700 text-charcoal-700 dark:text-cream-200 border border-cream-300 dark:border-charcoal-600">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
+        {(dietaryTags.length > 0 || rawAllergens.length > 0) && (
+          <div className="flex flex-wrap gap-4 items-center">
+            {dietaryTags.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 items-center">
+                <span className="text-xs text-charcoal-400 dark:text-charcoal-400 font-medium">Dietary:</span>
+                {dietaryTags.map(tag => (
+                  <span
+                    key={tag}
+                    className="text-xs px-2.5 py-0.5 rounded-full bg-cream-200 dark:bg-charcoal-700 text-charcoal-700 dark:text-cream-200 border border-cream-300 dark:border-charcoal-600 font-medium"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
 
-          {listing.allergens && listing.allergens.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 items-center">
-              <span className="text-xs text-charcoal-400 font-medium">Allergens:</span>
-              {listing.allergens.map(alg => (
-                <span key={alg} className="text-xs px-2.5 py-0.5 rounded-full bg-red-50 dark:bg-red-950/60 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800">
-                  ⚠️ {alg}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
+            {rawAllergens.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 items-center">
+                <span className="text-xs text-charcoal-400 dark:text-charcoal-400 font-medium">Allergens:</span>
+                {rawAllergens.map(alg => {
+                  const isClean = alg.toLowerCase().includes('none') || alg.toLowerCase().includes('clean');
+                  return (
+                    <span
+                      key={alg}
+                      className={`text-xs px-2.5 py-0.5 rounded-full border font-medium ${
+                        isClean
+                          ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
+                          : 'bg-red-500/10 text-red-300 border-red-500/30'
+                      }`}
+                    >
+                      {isClean ? `✅ ${alg}` : `⚠️ ${alg}`}
+                    </span>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Pickup Logistics */}
         <div className="p-4 rounded-xl bg-white dark:bg-charcoal-800/80 border border-cream-200 dark:border-charcoal-700 text-xs space-y-2">
@@ -166,8 +217,14 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
           <div className="flex items-start gap-2 text-charcoal-700 dark:text-charcoal-300">
             <MapPin className="w-4 h-4 text-forest-600 dark:text-emerald-400 mt-0.5 shrink-0" />
             <div>
-              <p className="font-semibold text-charcoal-900 dark:text-cream-100">{listing.pickup_location}</p>
-              <p className="text-charcoal-500 dark:text-charcoal-400 mt-0.5">{listing.donor_pickup_address || listing.pickup_location}, {listing.donor_city}</p>
+              <p className="font-semibold text-charcoal-900 dark:text-cream-100">
+                {listing.pickup_location || 'Address confirmed on collection pass'}
+              </p>
+              {(listing.donor_pickup_address || listing.donor_city) && (
+                <p className="text-charcoal-500 dark:text-charcoal-400 mt-0.5">
+                  {[listing.donor_pickup_address, listing.donor_city].filter(Boolean).join(', ')}
+                </p>
+              )}
             </div>
           </div>
           {listing.donor_phone && (
@@ -190,14 +247,14 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
 
         {/* Report Form Toggle */}
         {isReportOpen ? (
-          <form onSubmit={handleReportSubmit} className="p-4 rounded-xl bg-red-50/80 border border-red-200 space-y-3">
-            <h4 className="text-xs font-bold text-red-900 uppercase">Report Listing to Administration</h4>
+          <form onSubmit={handleReportSubmit} className="p-4 rounded-xl bg-red-950/40 border border-red-800 space-y-3">
+            <h4 className="text-xs font-bold text-red-300 uppercase">Report Listing to Administration</h4>
             <div>
-              <label className="block text-xs font-medium text-charcoal-700 mb-1">Reason</label>
+              <label className="block text-xs font-medium text-charcoal-300 mb-1">Reason</label>
               <select
                 value={reportReason}
                 onChange={e => setReportReason(e.target.value)}
-                className="w-full text-xs p-2 rounded-lg border border-red-200 bg-white"
+                className="w-full text-xs p-2 rounded-lg border border-red-800 bg-charcoal-900 text-cream-100"
               >
                 <option value="Spoiled or unsafe food">Spoiled or unsafe food</option>
                 <option value="Inaccurate quantity/details">Inaccurate quantity/details</option>
@@ -207,14 +264,14 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-charcoal-700 mb-1">Details</label>
+              <label className="block text-xs font-medium text-charcoal-300 mb-1">Details</label>
               <textarea
                 value={reportDescription}
                 onChange={e => setReportDescription(e.target.value)}
                 required
                 rows={2}
                 placeholder="Explain the issue for the moderation team..."
-                className="w-full text-xs p-2 rounded-lg border border-red-200 bg-white"
+                className="w-full text-xs p-2 rounded-lg border border-red-800 bg-charcoal-900 text-cream-100"
               />
             </div>
             <div className="flex gap-2 justify-end">
@@ -227,10 +284,10 @@ export const FoodDetailModal: React.FC<FoodDetailModalProps> = ({
             </div>
           </form>
         ) : (
-          <div className="flex items-center justify-between pt-2 border-t border-cream-200">
+          <div className="flex items-center justify-between pt-2 border-t border-cream-200 dark:border-charcoal-800">
             <button
               onClick={() => setIsReportOpen(true)}
-              className="text-xs text-charcoal-400 hover:text-red-600 flex items-center gap-1 transition-colors"
+              className="text-xs text-charcoal-400 hover:text-red-400 flex items-center gap-1 transition-colors"
             >
               <Flag className="w-3.5 h-3.5" />
               <span>Report issue</span>

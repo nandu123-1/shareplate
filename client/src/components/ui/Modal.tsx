@@ -54,26 +54,39 @@ export const Modal: React.FC<ModalProps> = ({
       <div
         className={`relative w-full ${maxWidthClasses[maxWidth]} bg-cream-50 dark:bg-charcoal-900 rounded-2xl shadow-soft-lg border border-cream-300 dark:border-charcoal-800 p-6 md:p-8 z-10 my-8 transition-all transform animate-in fade-in zoom-in-95`}
       >
-        <div className="flex items-start justify-between pb-4 border-b border-cream-200 dark:border-charcoal-800">
-          <div>
-            {title && (
-              <h3 className="text-xl font-bold text-forest-950 dark:text-cream-50 font-editorial tracking-tight">
-                {title}
-              </h3>
-            )}
-            {subtitle && (
-              <p className="text-xs text-charcoal-500 dark:text-charcoal-400 mt-1">{subtitle}</p>
-            )}
+        {title || subtitle ? (
+          <div className="flex items-start justify-between pb-4 border-b border-cream-200 dark:border-charcoal-800">
+            <div>
+              {title && (
+                <h3 className="text-xl font-bold text-forest-950 dark:text-cream-50 font-editorial tracking-tight">
+                  {title}
+                </h3>
+              )}
+              {subtitle && (
+                <p className="text-xs text-charcoal-500 dark:text-charcoal-400 mt-1">{subtitle}</p>
+              )}
+            </div>
+            <button
+              onClick={onClose}
+              aria-label="Close dialog"
+              className="p-1.5 rounded-lg text-charcoal-400 hover:text-charcoal-800 dark:hover:text-cream-200 hover:bg-cream-200 dark:hover:bg-charcoal-800 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
+        ) : (
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-charcoal-400 hover:text-charcoal-800 dark:hover:text-cream-200 hover:bg-cream-200 dark:hover:bg-charcoal-800 transition-colors"
+            aria-label="Close dialog"
+            className="absolute top-4 right-4 z-20 p-2 rounded-full bg-charcoal-950/70 hover:bg-charcoal-950 text-white backdrop-blur-md transition-all border border-charcoal-700/80 shadow-md"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
-        </div>
+        )}
 
-        <div className="pt-4 text-charcoal-800 dark:text-cream-100">{children}</div>
+        <div className={title || subtitle ? "pt-4 text-charcoal-800 dark:text-cream-100" : "text-charcoal-800 dark:text-cream-100"}>
+          {children}
+        </div>
       </div>
     </div>
   );
